@@ -17,7 +17,7 @@ class ReservationController extends Controller
     public function store(Request $request)
     {
 
-        $validatedData=   $request->validateWithBag('post',
+        $validatedData =   $request->validateWithBag('post',
                 [
                     'name'    =>'required',
                     'email'   =>'required|email',
@@ -28,7 +28,6 @@ class ReservationController extends Controller
                     'adults'  =>'required|integer'
                 ]);
 
-            if (!$validatedData->fails()) {
                 $reservation=new Reservation;
                 $reservation->fill($request->all());
                 if ($reservation->save()) {
@@ -36,11 +35,11 @@ class ReservationController extends Controller
                     Mail::to($request->get('email'))->send(new ReceiptNotification($reservation));
                     return back()->with('success','Se guardó con éxtio la solicitud');
                 }
-            }
 
-            return redirect('welcome')
-                ->withErrors($validatedData)
-                ->withInput();
+
+        return redirect('welcome')
+            ->withErrors($validatedData)
+            ->withInput();
 
 
 
