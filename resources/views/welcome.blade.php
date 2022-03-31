@@ -200,119 +200,11 @@
 <section class="section-padding">
 
     <div class="container">
-        <div class="row">
+        <div id="app" class="row">
 
             <div class="col-md-8">
-                <!-- success errors -->
-                @if($errors->any())
-                <div class="alert alert-danger">
-                    <ul>
-                        @foreach($errors->all() AS $error)
-                            <li>{{$error}}</li>
-                            @endforeach
-                    </ul>
-                </div>
-                @endif
 
-                <!-- Success message -->
-                    @if(Session::has('errors'))
-                        <div class="alert alert-success">
-                            Session::get('success')
-                        </div>
-                    @endif
-                <form name="contact-form" id="contactForm" action="{{route('store-reservation')}}" method="POST">
-{{csrf_field()}}
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="input-field">
-                                <input type="text" name="name" class="validate" id="name"  value="{{old('name')}}"  >
-                                <label for="name">Name</label>
-                            </div>
-
-                        </div><!-- /.col-md-6 -->
-
-                        <div class="col-md-6">
-                            <div class="input-field">
-                                <label  for="email">Email</label>
-                                <input id="email" type="email" name="email" class="validate" required value="{{old('email')}}"  >
-                            </div>
-                        </div><!-- /.col-md-6 -->
-                    </div><!-- /.row -->
-
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="input-field">
-                                <input id="phone" type="tel" name="phone" class="validate"  value="{{old('phone')}}"  required>
-                                <label for="phone">Phone Number</label>
-                            </div>
-                        </div><!-- /.col-md-6 -->
-
-                        <div class="col-md-6">
-                            <div class="input-field">
-                                <select id="terminal" name="terminal" required>
-                                    <option value="" disabled selected>Choose Port Terminal</option>
-                                    <option value="Mahogany Bay Port">Mahogany Bay Port</option>
-                                    <option value="Town Center / Roatan Village Port">Town Center / Roatan Village Port</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="input-field">
-                                <input id="adults" type="number" name="adults"  class="validate"  value="{{old('adults')}} " required>
-                                <label for="adults">Adults</label>
-                            </div>
-                        </div>
-
-                        <div class="col-md-6">
-                            <div class="input-field">
-                                <input id="kids" type="number" name="kids" class="validate" value="{{old('kids')}}"  required>
-                                <label for="kids">Kids</label>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="input-field">
-                                <select id="tour" name="tour" required>
-                                    <option value="" disabled selected>Choose Tour</option>
-                                    <option value="Roatan West Bay Beach">Roatan West Bay Beach</option>
-                                    <option value="Roatan West End Village">Roatan West End Village</option>
-                                    <option value="Mayan Jungle Zipline and West Bay Beach">Mayan Jungle Zipline &amp; West Bay Beach</option>
-                                    <option value="Daniel Johnson's Monkey & Sloth Hang Out">Daniel Johnson's Monkey &amp; Sloth Hang Out</option>
-                                    <option value="Glass Bottom Boat & Roatan Island Tour">Glass Bottom Boat &amp; Roatan Island Tour</option>
-                                    <option value="Horseback Riding & West Bay Beach">Horseback Riding &amp; West Bay Beach</option>
-                                    <option value="All Inclusive Roatan Snorkeling Tour">All Inclusive Roatan Snorkeling Tour</option>
-                                    <option value="Roatan East End & Mangrove Tour">Roatan East End &amp; Mangrove Tour</option>
-                                    <option value="Pirates Of The Caribbean Zipline & Las Palmas Beach">Pirates Of The Caribbean Zipline &amp; Las Palmas Beach</option>
-                                    <option value="Roatan East End & Mangrove Tour">Day In Little French Key Paradise Excursion</option>
-                                    <option value="Roatan Free-Style/Custom Tour">Roatan Free-Style/Custom Tour</option>
-                                    <option value="Discover Roatan Buggy Tour">Discover Roatan Buggy Tour</option>
-                                    <option value="Discover Roatan Buggy Tour All-Inclusive">Discover Roatan Buggy Tour All-Inclusive</option>
-                                    <option value="Buggy Tour At Sol Y Mar">Buggy Tour At Sol Y Mar</option>
-                                    <option value="Roatan Island Brewing Tour">Roatan Island Brewing Tour</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="col-md-6">
-                            <div class="input-field">
-                                <input type="date" class="form-control" name="date" value="{{old('date')}}" required>
-                                <label for="Arrival Date">Arrival Date</label>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="input-field">
-                        <textarea name="message" id="message" class="materialize-textarea" ></textarea>
-                        <label for="message">Message</label>
-                    </div>
-
-                    <button type="submit" name="submit" class="waves-effect waves-light btn pull-right text-medium mt-30 mb-sm-30">Send <i class="material-icons right">send</i></button>
-                </form>
+                <view-contacts></view-contacts>
             </div><!-- /.col-md-8 -->
 
             <div class="col-md-4 contact-info">
@@ -426,23 +318,14 @@
 <script src="{{asset('assets/magnific-popup/jquery.magnific-popup.min.js')}}"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBTyrJM9I7lPZZ9CNA_cqJcQzy4CqUiMdE"></script>
 <script src="{{asset('assets/js/scripts.js')}}"></script>
+<!-- Scripts -->
+<script src="{{ mix('js/app.js') }}" defer></script>
 
 
 <!-- Google Map Customization  -->
 <script type="text/javascript">
   jQuery(document).ready(function() {
 
-    $('#terminal').material_select();
-    $('#tour').material_select();
-
-    $('.datepicker').pickadate({
-                                 selectMonths: true, // Creates a dropdown to control month
-                                 selectYears: 15, // Creates a dropdown of 15 years to control year,
-                                 today: 'Today',
-                                 clear: 'Clear',
-                                 close: 'Ok',
-                                 closeOnSelect: false // Close upon selecting a date,
-                               });
 
     //set your google maps parameters
     var $latitude = 16.342049, //Visit http://www.latlong.net/convert-address-to-lat-long.html for generate your Lat. Long.

@@ -23,26 +23,13 @@
 
         <!-- Regular menu link -->
         <li class="nav-item">
-            <a href="{{route('createConf')}}" @if(Illuminate\Support\Facades\Request::route()->getName() == 'createConf') class="active nav-link " @else class=" nav-link " @endif><i
+            <a href="{{route('home')}}" @if(Illuminate\Support\Facades\Request::route()->getName() == 'home') class="active nav-link " @else class=" nav-link " @endif><i
                     class="demo-pli-calendar-4 fs-5 me-2"></i>
 
                 <span class="nav-label mininav-content ms-1">Agenda</span>
             </a>
         </li>
-        <li class="nav-item">
-            <a href="{{route('listConf')}}" @if(Illuminate\Support\Facades\Request::route()->getName() == 'listConf') class="active nav-link " @else class=" nav-link " @endif><i
-                    class="demo-pli-data-cloud fs-5 me-2"></i>
 
-                <span class="nav-label mininav-content ms-1">Lista de Resevaciones</span>
-            </a>
-        </li>
-        <li class="nav-item">
-            <a href="{{route('conexionDataBase')}}" @if(Illuminate\Support\Facades\Request::route()->getName() == 'conexionDataBase') class="active nav-link " @else class=" nav-link " @endif><i
-                    class="demo-pli-computer-secure fs-5 me-2"></i>
-
-                <span class="nav-label mininav-content ms-1">Conexión</span>
-            </a>
-        </li>
         <!-- END : Regular menu link -->
 
     </ul>

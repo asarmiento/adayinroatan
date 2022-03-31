@@ -30,6 +30,8 @@ import createConfiguration from './components/createConfiguration.vue';
 import editConfiguration from './components/editConfiguration.vue';
 import listsConfigurations from './components/listsConfigurations.vue';
 import viewConfigurations from './components/viewConfigurations.vue';
+import viewContacts from './components/contacts.vue';
+import viewSchedule from './components/schedule.vue';
 
 
 /**
@@ -37,7 +39,7 @@ import viewConfigurations from './components/viewConfigurations.vue';
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
-
+//import store from "./store/index"
 createApp({
     components:{
         Login,
@@ -46,8 +48,11 @@ createApp({
         createConfiguration,
         editConfiguration,
         viewConfigurations,
-        listsConfigurations
+        listsConfigurations,
+      viewContacts,
+      viewSchedule
     },
+         //   store: store,
               data() {
                   return {
                       count: 0

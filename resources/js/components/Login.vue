@@ -1,8 +1,8 @@
 <template>
 
                 <section id="content" class="content" >
-                    <div class="content__boxed w-300px min-vh-100 d-flex flex-column align-items-center justify-content-center" >
-                        <div class="content__wrap" style="    width: 300px;">
+                    <div class="content__boxed " style="display: flex; justify-content: center; ">
+                        <div class="content__wrap" style="    width: 400px;">
                             <!-- Login card -->
                             <div class="card shadow-lg">
                                 <div class="card-body">

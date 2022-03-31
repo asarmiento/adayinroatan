@@ -38,7 +38,7 @@
     <!-- Styles -->
 
 </head>
-<body class="jumping">
+<body class="antialiased">
 <!-- PAGE CONTAINER -->
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 <div id="root" class="root mn--max mn--sticky hd--expanded">

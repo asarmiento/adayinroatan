@@ -13,6 +13,9 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
+         \App\Models\User::create([
+         	'username'=> 'soporte@sistemasamigableslatam.com',
+	         'password'=>bcrypt('12345678')
+         ]);
     }
 }

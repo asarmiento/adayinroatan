@@ -24,6 +24,7 @@
 
     <!-- Nifty CSS [ REQUIRED ] -->
     <link rel="stylesheet" href="{{asset('assets/css/nifty.min.css')}}">
+    <link rel="stylesheet" href="{{asset('css/font-awesome.min.css')}}">
 
     <!-- Nifty Demo Icons [ OPTIONAL ] -->
     <link rel="stylesheet" href="{{asset('assets/css/demo-purpose/demo-icons.min.css')}}">
@@ -72,7 +73,6 @@
         <div class="content__boxed">
             <div id="app" class="content__wrap">
 	          @yield('content')
-
             </div>
         </div>
         <!-- FOOTER -->

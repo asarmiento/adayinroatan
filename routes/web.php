@@ -21,6 +21,12 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::post('/store-reservation', [App\Http\Controllers\ReservationController::class, 'store'])->name('store-reservation');
+Route::get('/list-reservation', [App\Http\Controllers\ReservationController::class, 'lists']);
+Route::get('/accept-reservation/{id}', [App\Http\Controllers\ReservationController::class, 'acceptReserv']);
+Route::get('/rejecting-reservation/{id}', [App\Http\Controllers\ReservationController::class, 'rejectingReserv']);
+Route::get('/reports-excel/{month}', [App\Http\Controllers\ReservationController::class, 'reportExcel']);
+Route::get('/reports-pdf/{month}', [App\Http\Controllers\ReservationController::class, 'reportPdf']);
+Route::post('/search-reservations-date', [App\Http\Controllers\ReservationController::class, 'searchDate']);
 
 Route::get('/list-users', [App\Http\Controllers\UserController::class, 'index'])->name('lists-users');
 Route::get('/edit/{id}/user', [App\Http\Controllers\UserController::class, 'edit']);
