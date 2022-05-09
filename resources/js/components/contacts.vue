@@ -139,7 +139,7 @@
     },
     methods:    {
       send() {
-        alert(this.data.terminal)
+
         axios.post('/store-reservation', this.data).then(response => {
           this.name=     '';
           this.email=    '';

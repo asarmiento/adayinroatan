@@ -20,6 +20,20 @@ use Maatwebsite\Excel\Facades\Excel;
 class ReservationController extends Controller
 {
 
+	public function searchDateDay($date)
+	{
+		return 	Reservation::where('date',Carbon::parse($date)->toDateString())->where('accept',true)->get();
+	}
+
+	public function searchDateDayCount($date)
+	{
+		$count = Reservation::where('date',Carbon::parse($date)->toDateString())->where('accept',true)->count();
+		if($count){
+			return $count;
+		}
+		return 	0;
+	}
+
 	public function lists()
 	{
 		return Reservation::where('accept',false)->where('status',false)->get();
@@ -73,7 +87,7 @@ class ReservationController extends Controller
 	public function searchDate(Request $request)
 	{
 		$data = $request->all();
-	$reservations=	Reservation::where('date',Carbon::parse($data['date'])->toDateString())->where('accept',true)->get();
+	$reservations=	Reservation::whereBetween('date',[Carbon::parse($data['date'])->firstOfMonth()->toDateString(),Carbon::parse($data['date'])->lastOfMonth()->toDateString()])->where('accept',true)->get();
 	return $reservations;
     }
 

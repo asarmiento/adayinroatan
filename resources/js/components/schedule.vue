@@ -22,9 +22,6 @@
            </div>
            <div class="col-lg-8">
                <div class="ibox">
-
-
-
                    <!--<div class="col-md-12 text-center"><a class="btn btn-success" data-toggle="modal"
                                                          data-target="#myModal">Nuevo registro</a></div>-->
                    <div class="row calendar">
@@ -44,13 +41,20 @@
                            <li class="day-name">Sábado</li>
                            <template v-for="day in dates">
                                <li class="day-date prev-dates" v-if="day === ''">
+                                   <strong  class="label label-danger">Reservations {{details.length}}</strong>
+
                                </li>
                                <li class="day-date today" data-toggle="modal" data-target="#contentShedule"
                                    v-else-if="day === currentDay"
-                                   @click="setScheduleDay(day,monthNumber,year)">{{day}}
+                                   @click="setScheduleDay(day,monthNumber,year)">
+                                   <p>{{day}}</p>
+                                   <!--<p>{{ year+'-'+dayDataFormat(monthNumber+1)+'-'+dayDataFormat(day)}}</p>-->
+                                   <strong v-if="getDate(year+'-'+dayDataFormat(monthNumber+1)+'-'+dayDataFormat(day))"  class="label label-danger">Reservations {{getDate(year+'-'+dayDataFormat(monthNumber+1)+'-'+dayDataFormat(day))}}</strong>
                                </li>
                                <li class="day-date" data-toggle="modal" data-target="#contentShedule" v-else
-                                   @click="setScheduleDay(day,monthNumber,year)">{{day}}
+                                   @click="setScheduleDay(day,monthNumber,year)"><p>{{day}}</p>
+                                   <!--<p>{{ year+'-'+dayDataFormat(monthNumber+1)+'-'+dayDataFormat(day)}}</p>-->
+                                   <strong  v-if="getDate(year+'-'+dayDataFormat(monthNumber+1)+'-'+dayDataFormat(day))"  class="label label-danger">Reservations {{getDate(year+'-'+dayDataFormat(monthNumber+1)+'-'+dayDataFormat(day))}}</strong>
                                </li>
                            </template>
                        </ol>
@@ -109,6 +113,7 @@
         data:             {
           name:           '',
           phone:          '',
+          date:          '',
           identification: '',
           type_card:      '',
           all_day:        false,
@@ -137,27 +142,45 @@
     computed:   {
 
       selectDay() {
-     //   return this.$store.getters.selectDaySchedulesGetters
+
       }
     },
     mounted() {
     //  this.timesMonday.filter()
+
+      this.data.date = this.year + '-' + (this.monthNumber+1) + '-' + this.day;
     },
     created() {
 
 
       this.currentDate = new Date();
       this.currentDay  = this.currentDate.getDate();
+      this.day  = this.dayDataFormat(this.currentDate.getDate());
       this.monthNumber = this.currentDate.getMonth();
       this.year        = this.currentDate.getFullYear();
-console.log(this.currentDate.getMonth())
+console.log(this.currentDay)
       this.month = this.monthNames[this.monthNumber];
+      this.data.date = this.year + '-' + this.dayDataFormat(this.monthNumber+1) + '-' + this.day;
+      axios.post('/search-reservations-date', this.data).then(response=>{
+        this.details = response.data
+      });
       this.writeMonth()
       axios.get('/list-reservation').then(response => {
         this.histories = response.data
       });
     },
     methods:    {
+      getDate(date){
+       var dataV =0
+        const  response = axios.get('/search-date-count/'+date.toString()).then(response=>{
+          dataV=   response.data
+          console.log(dataV)
+        }).catch(error=>{
+          dataV = 0
+        })
+return dataV
+
+      },
       donwloadPdf(){
 
         axios.get('/reports-pdf/'+(this.month+1)).then(response=>{
@@ -183,7 +206,12 @@ console.log(this.currentDate.getMonth())
           Swal.fire('Excelente',response.data.message,'success')
         })
       },
-
+dayDataFormat(day){
+        if(day < 10){
+          return "0"+day
+        }
+        return day
+},
       writeMonth() {
         this.dates = []
         let month  = this.monthNumber ;

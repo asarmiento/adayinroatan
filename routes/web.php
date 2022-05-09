@@ -27,6 +27,8 @@ Route::get('/rejecting-reservation/{id}', [App\Http\Controllers\ReservationContr
 Route::get('/reports-excel/{month}', [App\Http\Controllers\ReservationController::class, 'reportExcel']);
 Route::get('/reports-pdf/{month}', [App\Http\Controllers\ReservationController::class, 'reportPdf']);
 Route::post('/search-reservations-date', [App\Http\Controllers\ReservationController::class, 'searchDate']);
+Route::get('/search-date/{date}', [App\Http\Controllers\ReservationController::class, 'searchDateDay']);
+Route::get('/search-date-count/{date}', [App\Http\Controllers\ReservationController::class, 'searchDateDayCount']);
 
 Route::get('/list-users', [App\Http\Controllers\UserController::class, 'index'])->name('lists-users');
 Route::get('/edit/{id}/user', [App\Http\Controllers\UserController::class, 'edit']);
